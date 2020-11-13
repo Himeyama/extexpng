@@ -7,3 +7,6 @@ COPY extexpng /root/extexpng
 
 RUN apt install ruby -y
 RUN apt install texlive-extra-utils poppler-utils poppler-data -y
+
+RUN chmod u+x /root/extexpng/server.rb
+RUN chmod u+x /root/extexpng/tex.rb
