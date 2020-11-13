@@ -1,0 +1,15 @@
+/* #textext {
+    margin: 0;
+    padding: 16px;
+    background: #2c2e35;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    font-family: Consolas, 'Courier New', monospace;
+    width: calc(100% - 32px);
+    height: 300px;
+} */
+
+pre{
+    font-family: Consolas, 'Courier New', monospace;
+}

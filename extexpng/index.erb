@@ -1,0 +1,68 @@
+<% require "cgi"
+require "cgi/session"
+require "securerandom"
+ARGV.replace(["name=hoge"]) 
+cgi = CGI.new
+session = CGI::Session.new cgi
+session["token"] = SecureRandom.hex 32
+%>
+
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <link rel="stylesheet" href="assets/index.css">
+    </head>
+    <body>
+        <!--textarea id="textext" name="text" spellcheck="false">\documentclass{jsarticle}
+
+\usepackage{color}
+\usepackage{bm}
+\definecolor{text-black}{rgb}{0.17, 0.18, 0.21}
+\color{text-black}
+
+\pagestyle{empty}
+\begin{document}
+
+\begin{eqnarray*}
+    x &=& \frac{-b \pm \sqrt{b^2 - 4ac}}{2a}
+\end{eqnarray*}
+
+\end{document}</textarea-->
+        <!--<input type="hidden" name="authenticity_token" value='<%= session["token"] %>'> -->
+    
+        <div id="editor" style="height: 300px">\documentclass{jsarticle}
+\usepackage{color}
+\usepackage{bm}
+\definecolor{text-black}{rgb}{0.17, 0.18, 0.21}
+\color{text-black}
+\pagestyle{empty}
+\begin{document}
+
+\begin{eqnarray*}
+    x &=& \frac{-b \pm \sqrt{b^2 - 4ac}}{2a}
+\end{eqnarray*}
+
+\end{document}</div>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/ace/1.2.0/ace.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/ace/1.2.0/ext-language_tools.js"></script>
+        <script>
+            var editor = ace.edit("editor")
+            editor.$blockScrolling = Infinity;
+            editor.setOptions({
+                enableBasicAutocompletion: true,
+                enableSnippets: true,
+                enableLiveAutocompletion: true
+            });
+            editor.setTheme("ace/theme/chrome")
+            editor.getSession().setMode("ace/mode/latex")
+            editor.setFontSize(16)
+            editor.getSession().setTabSize(4)
+            editor.getSession().setUseSoftTabs(true)
+        </script>
+
+        <img src="" id="preview">
+        <script src="assets/index.js"></script>
+        <input type="button" value="プレビュー" onclick="preview()">
+    </body>
+</html>
